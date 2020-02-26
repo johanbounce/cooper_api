@@ -11,7 +11,7 @@ require "action_mailbox/engine"
 require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
-llllll
+
 Bundler.require(*Rails.groups)
 
 module CooperApi
