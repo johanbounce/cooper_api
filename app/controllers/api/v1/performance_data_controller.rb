@@ -1,17 +1,19 @@
 class Api::V1::PerformanceDataController < ApplicationController
-    def create
-      data = PerformanceData.new(Performance_data_params)
+  before_action :authenticate_user!
 
-      if data.save
-        head :ok
-      else
-        render json: { error: data.errors.full_message }
-      end
+  def create
+    data = PerformanceData.new(performance_data_params.merge(user: current_user))
+
+    if data.save
+      head :ok
+    else
+      render json: { error: data.errors.full_messages }
     end
+  end
 
-    private
+  private
 
-    def performance_data_params
-        params.require(:performance_data).permit!
-    end
+  def performance_data_params
+    params.require(:performance_data).permit!
+  end
 end
