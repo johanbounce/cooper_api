@@ -8,7 +8,12 @@ class Api::V1::PerformanceDataController < ApplicationController
       head :ok
     else
       render json: { error: data.errors.full_messages }
-    end
+    end    
+  end
+
+  def index
+    collection = current_user.performance_data
+    render json: { entries: collection }
   end
 
   private
